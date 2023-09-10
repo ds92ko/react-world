@@ -1,6 +1,6 @@
 {
   "root": true,
-    "env": {
+  "env": {
     "browser": true,
     "node": true,
     "es6": true
@@ -11,15 +11,21 @@
     "unused-imports",
     "simple-import-sort",
     "import",
-    "prettier"],
+    "prettier"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json",
     "createDefaultProgram": true,
-    "ecmaFeatures": { "jsx": true },
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "jsx": true,
     "useJSXTextNode": true
   },
-  "ignorePatterns": ["node_modules/"],
+  "ignorePatterns": [
+    "node_modules/",
+    "next.config.js"
+  ],
   "extends": [
     "airbnb",
     "airbnb-typescript",
@@ -29,7 +35,8 @@
     "prettier",
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended",
-    "eslint-config-prettier"
+    "eslint-config-prettier",
+    "plugin:storybook/recommended"
   ],
   "rules": {
     "simple-import-sort/imports": "error",
@@ -41,7 +48,10 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".ts", ".tsx"]
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
       }
     ],
     "react/no-unescaped-entities": "off",
@@ -55,7 +65,12 @@
     "no-warning-comments": [
       "warn",
       {
-        "terms": ["TODO", "FIXME", "XXX", "BUG"],
+        "terms": [
+          "TODO",
+          "FIXME",
+          "XXX",
+          "BUG"
+        ],
         "location": "anywhere"
       }
     ],
@@ -65,15 +80,47 @@
     "@typescript-eslint/naming-convention": [
       "error",
       {
-        "format": ["camelCase", "UPPER_CASE", "PascalCase"],
+        "format": [
+          "camelCase",
+          "UPPER_CASE",
+          "PascalCase"
+        ],
         "selector": "variable",
         "leadingUnderscore": "allow"
       },
-      { "format": ["camelCase", "PascalCase"], "selector": "function" },
-      { "format": ["PascalCase"], "selector": "interface" },
-      { "format": ["PascalCase"], "selector": "typeAlias" }
+      {
+        "format": [
+          "camelCase",
+          "PascalCase"
+        ],
+        "selector": "function"
+      },
+      {
+        "format": [
+          "PascalCase"
+        ],
+        "selector": "interface"
+      },
+      {
+        "format": [
+          "PascalCase"
+        ],
+        "selector": "typeAlias"
+      }
     ],
-    "@typescript-eslint/array-type": ["error", { "default": "array-simple" }],
+    "@typescript-eslint/array-type": [
+      "error",
+      {
+        "default": "array-simple"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.stories.*", "**/.storybook/**/*.*"],
+        "peerDependencies": true
+      }
+    ],
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off"
   }

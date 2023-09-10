@@ -1,3 +1,11 @@
+import Banner from '@/components/home/Banner'
+import ContentSection from '@/components/home/ContentSection'
+
 export default function Home() {
-  return <div>React World</div>
+  return (
+    <>
+      <Banner />
+      <ContentSection />
+    </>
+  )
 }
