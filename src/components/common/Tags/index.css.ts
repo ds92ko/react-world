@@ -3,6 +3,7 @@ import { style } from '@vanilla-extract/css'
 export const tagList = style({
   display: 'flex',
   gap: 3,
+  flexWrap: 'wrap',
 })
 
 export const tagItem = style({

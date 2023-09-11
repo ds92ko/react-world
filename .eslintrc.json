@@ -61,6 +61,8 @@
     "no-implicit-coercion": "error",
     "indent": "off",
     "semi": "off",
+    "react/require-default-props": "off",
+    "import/prefer-default-export": "off",
     "no-extra-boolean-cast": "off",
     "no-warning-comments": [
       "warn",
@@ -122,6 +124,7 @@
       }
     ],
     "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/no-array-index-key": "off"
   }
 }

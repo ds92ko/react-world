@@ -3,22 +3,27 @@ import Link from 'next/link'
 
 import Icon from '@/components/common/Icon'
 import { TagItem, TagList } from '@/components/common/Tags'
+import { IArticlesData } from '@/types/articles'
 
 import {
-  author,
+  articleDescription,
+  articleTitle,
+  authorLink,
   card,
-  createdAt,
-  description,
+  createdDate,
   favorite,
   info,
   meta,
   more,
   profile,
   readMore,
-  title,
 } from './index.css'
 
-export default function Card() {
+interface IProps {
+  data: IArticlesData
+}
+
+export default function Card({ data }: IProps) {
   return (
     <article className={card}>
       <div className={meta}>
@@ -27,39 +32,36 @@ export default function Card() {
             <Image
               width={32}
               height={32}
-              src="https://api.realworld.io/images/demo-avatar.png"
+              src={data.author.image}
               alt="profile"
             />
           </div>
           <div>
-            <Link href="/" className={author}>
-              Anah Benešová
+            <Link href={`/@${data.author.username}`} className={authorLink}>
+              {data.author.username}
             </Link>
-            <p className={createdAt}>December 9, 2022</p>
+            <p className={createdDate}>{data.createdAt}</p>
           </div>
         </div>
-        <button type="button" className={favorite}>
+        <button
+          type="button"
+          className={`${favorite} ${data.favorited ? 'active' : ''}`}>
           <Icon name="heart" type="solid" className="w-[12px]" />
-          1786
+          {data.favoritesCount}
         </button>
       </div>
-      <div>
-        <h2 className={title}>
-          Try to transmit the HTTP card, maybe it will override the multi-byte
-          hard drive!
-        </h2>
-        <p className={description}>
-          Assumenda molestiae laboriosam enim ipsum quaerat enim officia vel
-          quo. Earum odit rem natus totam atque cumque. Sint dolorem facere non.
-        </p>
+      <Link href={`/article/${data.slug}`}>
+        <h2 className={articleTitle}>{data.title}</h2>
+        <p className={articleDescription}>{data.description}</p>
         <div className={more}>
           <span className={readMore}>Read more...</span>
           <TagList>
-            <TagItem>voluptate</TagItem>
-            <TagItem>rerum</TagItem>
+            {data.tagList.map((tag, idx) => (
+              <TagItem key={idx}>{tag}</TagItem>
+            ))}
           </TagList>
         </div>
-      </div>
+      </Link>
     </article>
   )
 }

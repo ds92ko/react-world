@@ -7,10 +7,6 @@ interface IProps {
   className?: string
 }
 
-export default function Icon({ name, type, className }: IProps) {
+export default function Icon({ name, type, className = '' }: IProps) {
   return <div className={className}>{icons[name][type]}</div>
-}
-
-Icon.defaultProps = {
-  className: '',
 }

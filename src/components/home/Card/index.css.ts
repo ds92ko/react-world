@@ -24,13 +24,13 @@ export const profile = style({
   overflow: 'hidden',
 })
 
-export const author = style({
+export const authorLink = style({
   color: 'var(--color-primary)',
   fontWeight: 500,
   lineHeight: '16px',
 })
 
-export const createdAt = style({
+export const createdDate = style({
   color: 'var(--color-gray-2)',
   fontSize: 12,
   fontWeight: 300,
@@ -48,20 +48,20 @@ export const favorite = style({
   border: '1px solid var(--color-primary)',
   borderRadius: 3,
   selectors: {
-    '&:hover': {
+    '&:hover, &.active': {
       background: 'var(--color-primary)',
       color: 'var(--color-white)',
     },
   },
 })
 
-export const title = style({
+export const articleTitle = style({
   fontSize: 24,
   fontWeight: 600,
   marginBottom: 3,
 })
 
-export const description = style({
+export const articleDescription = style({
   color: 'var(--color-gray-4)',
   fontWeight: 300,
   marginBottom: 15,
