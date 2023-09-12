@@ -3,6 +3,11 @@ import { style } from '@vanilla-extract/css'
 export const content = style({
   display: 'flex',
   gap: '0 30px',
+  '@media': {
+    'screen and (max-width: 768px)': {
+      flexDirection: 'column',
+    },
+  },
 })
 
 export const tabs = style({
@@ -14,7 +19,8 @@ export const popularTags = style({
   width: '24%',
   '@media': {
     'screen and (max-width: 768px)': {
-      display: 'none',
+      width: '100%',
+      marginBottom: 48,
     },
   },
 })

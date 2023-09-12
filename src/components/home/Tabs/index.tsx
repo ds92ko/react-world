@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 import { useQuery } from 'react-query'
 
 import { fetchArticles } from '@/services/api/articles'
+import useArticlesStore from '@/store/articlesStore'
 import { IFetchArticlesRes } from '@/types/articles'
 
 import Card from '../Card'
@@ -49,14 +50,11 @@ function TabContent({ children }: { children: ReactNode }) {
 }
 
 export default function Tabs({ className = '' }: IProps) {
+  const { articlesParams } = useArticlesStore()
   const { data, isLoading, isError } = useQuery(
-    'article',
+    ['article', articlesParams],
     async () => {
-      const params = {
-        offset: 0,
-        limit: 10,
-      }
-      const response: IFetchArticlesRes = await fetchArticles(params)
+      const response: IFetchArticlesRes = await fetchArticles(articlesParams)
 
       return response
     },
