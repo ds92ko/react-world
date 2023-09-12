@@ -11,7 +11,7 @@ export const tabs = style({
 
 export const popularTags = style({
   flexShrink: 0,
-  width: '22%',
+  width: '24%',
   '@media': {
     'screen and (max-width: 768px)': {
       display: 'none',

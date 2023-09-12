@@ -1,3 +1,11 @@
+'use client'
+
+import { ReactNode } from 'react'
+import { useQuery } from 'react-query'
+
+import { fetchArticles } from '@/services/api/articles'
+import { IFetchArticlesRes } from '@/types/articles'
+
 import Card from '../Card'
 import {
   tabContentItem,
@@ -26,28 +34,47 @@ function TabNav() {
   )
 }
 
-function TabContent() {
+function TabContent({ children }: { children: ReactNode }) {
+  const childArray = Array.isArray(children) ? children : [children]
+
   return (
     <ul className={tabContentList}>
-      <li className={tabContentItem}>
-        <Card />
-      </li>
-      <li className={tabContentItem}>
-        <Card />
-      </li>
+      {childArray.map((item, idx) => (
+        <li key={idx} className={tabContentItem}>
+          {item}
+        </li>
+      ))}
     </ul>
   )
 }
 
-export default function Tabs({ className }: IProps) {
+export default function Tabs({ className = '' }: IProps) {
+  const { data, isLoading, isError } = useQuery(
+    'article',
+    async () => {
+      const params = {
+        offset: 0,
+        limit: 10,
+      }
+      const response: IFetchArticlesRes = await fetchArticles(params)
+
+      return response
+    },
+    { staleTime: Infinity }
+  )
+
   return (
     <div className={`w-full ${className}`}>
       <TabNav />
-      <TabContent />
+      {isLoading && <div>isLoading</div>}
+      {isError && <div>isError</div>}
+      {data && (
+        <TabContent>
+          {data.articles.map((article, idx) => (
+            <Card key={idx} data={article} />
+          ))}
+        </TabContent>
+      )}
     </div>
   )
-}
-
-Tabs.defaultProps = {
-  className: '',
 }

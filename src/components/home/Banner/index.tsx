@@ -6,7 +6,7 @@ interface IProps {
   className?: string
 }
 
-export default function Banner({ className }: IProps) {
+export default function Banner({ className = '' }: IProps) {
   return (
     <section className={`${banner} ${className}`}>
       <div className={container}>
@@ -15,8 +15,4 @@ export default function Banner({ className }: IProps) {
       </div>
     </section>
   )
-}
-
-Banner.defaultProps = {
-  className: '',
 }

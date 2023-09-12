@@ -6,6 +6,7 @@ import { Source_Sans_3, Titillium_Web } from 'next/font/google'
 
 import Footer from '@/components/common/Footer'
 import Header from '@/components/common/Header'
+import QueryProvider from '@/components/provider/QueryProvider'
 
 const sourceSans3 = Source_Sans_3({
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -34,9 +35,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${sourceSans3.variable} ${titilliumWeb.variable}`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <QueryProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   )
