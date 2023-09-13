@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import { useQuery } from 'react-query'
 
 import { fetchArticles } from '@/services/api/articles'
-import useArticlesStore from '@/store/articlesStore'
+import useArticlesStore, { initArticlesParams } from '@/store/articlesStore'
 import { IFetchArticlesRes } from '@/types/articles'
 
 import Card from '../Card'
@@ -21,15 +21,24 @@ interface IProps {
 }
 
 function TabNav() {
+  const { articlesParams, setArticlesParams } = useArticlesStore()
+  const { tag } = articlesParams
+
+  const handleClickTab = () => setArticlesParams({ ...initArticlesParams })
+
   return (
     <div className={tabNav}>
       <ul className={tabNavList}>
-        <li className={`${tabNavItem} active`}>
-          <button type="button">Global Feed</button>
+        <li className={`${tabNavItem} ${tag ? '' : 'active'}`}>
+          <button type="button" onClick={handleClickTab}>
+            Global Feed
+          </button>
         </li>
-        <li className={tabNavItem}>
-          <button type="button"># Welcome</button>
-        </li>
+        {tag && (
+          <li className={`${tabNavItem} ${tag ? 'active' : ''}`}>
+            <button type="button"># {tag}</button>
+          </li>
+        )}
       </ul>
     </div>
   )

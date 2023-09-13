@@ -1,5 +1,4 @@
-import { MouseEvent, ReactNode, useEffect } from 'react'
-import { useQueryClient } from 'react-query'
+import { MouseEvent, ReactNode } from 'react'
 
 import useArticlesStore, { initArticlesParams } from '@/store/articlesStore'
 
@@ -14,8 +13,7 @@ export function TagList({ children }: IProps) {
 }
 
 export function TagItem({ children }: IProps) {
-  const { articlesParams, setArticlesParams } = useArticlesStore()
-  const queryClient = useQueryClient()
+  const { setArticlesParams } = useArticlesStore()
 
   const handleClickTag = (e: MouseEvent<HTMLButtonElement>) => {
     const tagButton = e.target as HTMLButtonElement
@@ -23,10 +21,6 @@ export function TagItem({ children }: IProps) {
 
     setArticlesParams({ ...initArticlesParams, tag })
   }
-
-  useEffect(() => {
-    queryClient.invalidateQueries(['article', articlesParams])
-  }, [articlesParams, queryClient])
 
   return (
     <li className={tagItem}>
