@@ -1,4 +1,6 @@
-import { ReactNode } from 'react'
+import { MouseEvent, ReactNode } from 'react'
+
+import useArticlesStore, { initArticlesParams } from '@/store/articlesStore'
 
 import { tagItem, tagList } from './index.css'
 
@@ -11,5 +13,20 @@ export function TagList({ children }: IProps) {
 }
 
 export function TagItem({ children }: IProps) {
-  return <li className={tagItem}>{children}</li>
+  const { setArticlesParams } = useArticlesStore()
+
+  const handleClickTag = (e: MouseEvent<HTMLButtonElement>) => {
+    const tagButton = e.target as HTMLButtonElement
+    const tag = tagButton.innerHTML
+
+    setArticlesParams({ ...initArticlesParams, tag })
+  }
+
+  return (
+    <li className={tagItem}>
+      <button type="button" onClick={handleClickTag}>
+        {children}
+      </button>
+    </li>
+  )
 }

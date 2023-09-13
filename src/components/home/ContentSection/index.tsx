@@ -1,15 +1,15 @@
 import { container } from '@/styles/app.css'
 
+import Articles from '../Articles'
 import PopularTags from '../PopularTags'
-import Tabs from '../Tabs'
-import { content, popularTags, tabs } from './index.css'
+import { articles, content, popularTags } from './index.css'
 
 export default function ContentSection() {
   return (
     <section className="mt-[24px]">
       <div className={container}>
         <div className={content}>
-          <Tabs className={tabs} />
+          <Articles className={articles} />
           <PopularTags className={popularTags} />
         </div>
       </div>

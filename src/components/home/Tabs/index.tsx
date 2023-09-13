@@ -1,12 +1,7 @@
-'use client'
-
 import { ReactNode } from 'react'
-import { useQuery } from 'react-query'
 
-import { fetchArticles } from '@/services/api/articles'
-import { IFetchArticlesRes } from '@/types/articles'
+import useArticlesStore, { initArticlesParams } from '@/store/articlesStore'
 
-import Card from '../Card'
 import {
   tabContentItem,
   tabContentList,
@@ -15,26 +10,31 @@ import {
   tabNavList,
 } from './index.css'
 
-interface IProps {
-  className?: string
-}
+export function TabNav() {
+  const { articlesParams, setArticlesParams } = useArticlesStore()
+  const { tag } = articlesParams
 
-function TabNav() {
+  const handleClickTab = () => setArticlesParams({ ...initArticlesParams })
+
   return (
     <div className={tabNav}>
       <ul className={tabNavList}>
-        <li className={`${tabNavItem} active`}>
-          <button type="button">Global Feed</button>
+        <li className={`${tabNavItem} ${tag ? '' : 'active'}`}>
+          <button type="button" onClick={handleClickTab}>
+            Global Feed
+          </button>
         </li>
-        <li className={tabNavItem}>
-          <button type="button"># Welcome</button>
-        </li>
+        {tag && (
+          <li className={`${tabNavItem} ${tag ? 'active' : ''}`}>
+            <button type="button"># {tag}</button>
+          </li>
+        )}
       </ul>
     </div>
   )
 }
 
-function TabContent({ children }: { children: ReactNode }) {
+export function TabContent({ children }: { children: ReactNode }) {
   const childArray = Array.isArray(children) ? children : [children]
 
   return (
@@ -45,36 +45,5 @@ function TabContent({ children }: { children: ReactNode }) {
         </li>
       ))}
     </ul>
-  )
-}
-
-export default function Tabs({ className = '' }: IProps) {
-  const { data, isLoading, isError } = useQuery(
-    'article',
-    async () => {
-      const params = {
-        offset: 0,
-        limit: 10,
-      }
-      const response: IFetchArticlesRes = await fetchArticles(params)
-
-      return response
-    },
-    { staleTime: Infinity }
-  )
-
-  return (
-    <div className={`w-full ${className}`}>
-      <TabNav />
-      {isLoading && <div>isLoading</div>}
-      {isError && <div>isError</div>}
-      {data && (
-        <TabContent>
-          {data.articles.map((article, idx) => (
-            <Card key={idx} data={article} />
-          ))}
-        </TabContent>
-      )}
-    </div>
   )
 }
