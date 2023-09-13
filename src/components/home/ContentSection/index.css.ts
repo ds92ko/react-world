@@ -10,7 +10,7 @@ export const content = style({
   },
 })
 
-export const tabs = style({
+export const articles = style({
   flexGrow: 1,
 })
 
