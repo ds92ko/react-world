@@ -15,6 +15,7 @@ globalStyle(':root', {
     '--color-gray-5': vars.color.gray5,
     '--color-gray-6': vars.color.gray6,
     '--color-gray-7': vars.color.gray7,
+    '--color-gray-8': vars.color.gray8,
     '--alpha-black-1': vars.alpha.black1,
     '--alpha-black-2': vars.alpha.black2,
     '--alpha-black-3': vars.alpha.black3,
