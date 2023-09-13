@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 
 import { fetchArticles } from '@/services/api/articles'
@@ -15,7 +16,7 @@ interface IProps {
 }
 
 export default function Articles({ className }: IProps) {
-  const { articlesParams } = useArticlesStore()
+  const { articlesParams, articlesCount, setArticlesCount } = useArticlesStore()
   const { data, isLoading, isError } = useQuery(
     ['article', articlesParams],
     async () => {
@@ -26,19 +27,26 @@ export default function Articles({ className }: IProps) {
     { staleTime: Infinity }
   )
 
+  useEffect(() => {
+    if (data && articlesCount !== data.articlesCount)
+      setArticlesCount(data.articlesCount)
+  }, [articlesCount, data, setArticlesCount])
+
   return (
     <div className={`w-full ${className}`}>
       <TabNav />
       {isLoading && <div>isLoading</div>}
       {isError && <div>isError</div>}
       {data && (
-        <TabContent>
-          {data.articles.map((article, idx) => (
-            <Card key={idx} data={article} />
-          ))}
-        </TabContent>
+        <>
+          <TabContent>
+            {data.articles.map((article, idx) => (
+              <Card key={idx} data={article} />
+            ))}
+          </TabContent>
+          <Pagination />
+        </>
       )}
-      <Pagination />
     </div>
   )
 }
