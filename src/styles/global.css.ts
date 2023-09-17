@@ -5,6 +5,10 @@ import vars from './vars.css'
 globalStyle(':root', {
   vars: {
     '--color-primary': vars.color.primary,
+    '--color-secondary': vars.color.secondary,
+    '--color-danger': vars.color.danger,
+    '--color-warning': vars.color.warning,
+    '--color-success': vars.color.success,
     '--color-white': vars.color.white,
     '--color-black-1': vars.color.black1,
     '--color-black-2': vars.color.black2,
