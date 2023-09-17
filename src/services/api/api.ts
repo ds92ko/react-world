@@ -7,3 +7,8 @@ export const apiInstance = axios.create({
     // Authorization: 'Token xxxxxx.yyyyyyy.zzzzzz',
   },
 })
+
+// apiInstance.interceptors.request.use(
+//   config => config,
+//   error => Promise.reject(error)
+// )
