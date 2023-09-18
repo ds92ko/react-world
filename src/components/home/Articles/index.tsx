@@ -19,7 +19,7 @@ interface IProps {
 export default function Articles({ className }: IProps) {
   const { articlesParams, articlesCount, setArticlesCount } = useArticlesStore()
   const { data, isLoading, isError } = useQuery(
-    ['article', articlesParams],
+    ['articles', articlesParams],
     async () => {
       const response: IFetchArticlesRes = await fetchArticles(articlesParams)
 

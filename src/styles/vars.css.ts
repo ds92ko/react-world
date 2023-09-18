@@ -2,7 +2,7 @@ import { createGlobalTheme } from '@vanilla-extract/css'
 
 const vars = createGlobalTheme(':root', {
   color: {
-    primary: '#FFC0CB',
+    primary: '#FFA4B4',
     secondary: '#FF8096',
     danger: '#B85C5C',
     warning: '#FFC107',
