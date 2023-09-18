@@ -1,48 +1,34 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
+import AuthorInfo from '@/components/common/AuthorInfo'
 import Icon from '@/components/common/Icon'
 import { TagItem, TagList } from '@/components/common/Tags'
-import { IArticlesData } from '@/types/articles'
+import { IArticleData } from '@/types/articles'
 
 import {
   articleDescription,
   articleTitle,
-  authorLink,
   card,
-  createdDate,
   favorite,
-  info,
   meta,
   more,
-  profile,
   readMore,
 } from './index.css'
 
 interface IProps {
-  data: IArticlesData
+  data: IArticleData
 }
 
 export default function Card({ data }: IProps) {
   return (
     <article className={card}>
       <div className={meta}>
-        <div className={info}>
-          <div className={profile}>
-            <Image
-              width={32}
-              height={32}
-              src={data.author.image}
-              alt="profile"
-            />
-          </div>
-          <div>
-            <Link href={`/@${data.author.username}`} className={authorLink}>
-              {data.author.username}
-            </Link>
-            <p className={createdDate}>{data.createdAt}</p>
-          </div>
-        </div>
+        <AuthorInfo
+          imgSrc={data.author.image}
+          username={data.author.username}
+          createdAt={data.createdAt}
+        />
+        {/* TODO: 버튼 컴포넌트 분리 */}
         <button
           type="button"
           className={`${favorite} ${data.favorited ? 'active' : ''}`}>

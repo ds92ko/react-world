@@ -1,4 +1,4 @@
-export interface IArticlesData {
+export interface IArticleData {
   slug: string
   title: string
   description: string
@@ -17,7 +17,7 @@ export interface IArticlesData {
 }
 
 export interface IFetchArticlesRes {
-  articles: IArticlesData[]
+  articles: IArticleData[]
   articlesCount: number
 }
 

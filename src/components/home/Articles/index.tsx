@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 
+import Loading from '@/components/common/Loading'
 import { fetchArticles } from '@/services/api/articles'
 import useArticlesStore from '@/store/articlesStore'
 import { IFetchArticlesRes } from '@/types/articles'
@@ -18,7 +19,7 @@ interface IProps {
 export default function Articles({ className }: IProps) {
   const { articlesParams, articlesCount, setArticlesCount } = useArticlesStore()
   const { data, isLoading, isError } = useQuery(
-    ['article', articlesParams],
+    ['articles', articlesParams],
     async () => {
       const response: IFetchArticlesRes = await fetchArticles(articlesParams)
 
@@ -35,7 +36,7 @@ export default function Articles({ className }: IProps) {
   return (
     <div className={`w-full ${className}`}>
       <TabNav />
-      {isLoading && <div>isLoading</div>}
+      {isLoading && <Loading />}
       {isError && <div>isError</div>}
       {data && (
         <>
