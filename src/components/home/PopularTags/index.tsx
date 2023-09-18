@@ -2,6 +2,7 @@
 
 import { useQuery } from 'react-query'
 
+import Loading from '@/components/common/Loading'
 import { TagItem, TagList } from '@/components/common/Tags'
 import { fetchTags } from '@/services/api/tags'
 
@@ -29,7 +30,7 @@ export default function PopularTags({ className = '' }: IProps) {
     <aside className={className}>
       <div className={asideBox}>
         <h3 className={asideTitle}>Popular Tags</h3>
-        {isLoading && <div>isLoading</div>}
+        {isLoading && <Loading />}
         {isError && <div>isError</div>}
         {tags && (
           <TagList>
