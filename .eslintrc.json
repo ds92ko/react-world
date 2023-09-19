@@ -123,6 +123,7 @@
         "peerDependencies": true
       }
     ],
+    "react/button-has-type": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "react/no-array-index-key": "off",

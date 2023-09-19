@@ -14,20 +14,26 @@ import { isAxiosError } from '@/util'
 
 import { buttonGroup, infoMsg, loginForm, loginInput } from './index.css'
 
-type LoginInputName = 'email' | 'password'
+type RegisterInputName = 'username' | 'email' | 'password'
 
-interface ILoginInput {
-  name: LoginInputName
+interface IRegisterInput {
+  name: RegisterInputName
   type: string
   placeholder: string
 }
 
 const defaultValues = {
+  username: '',
   email: '',
   password: '',
 }
 
-const loginInputs: ILoginInput[] = [
+const registerInputs: IRegisterInput[] = [
+  {
+    name: 'username',
+    type: 'text',
+    placeholder: 'Username',
+  },
   {
     name: 'email',
     type: 'text',
@@ -40,7 +46,7 @@ const loginInputs: ILoginInput[] = [
   },
 ]
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const { push } = useRouter()
   const {
     handleSubmit,
@@ -72,11 +78,11 @@ export default function LoginForm() {
   return (
     <section className="mt-[24px]">
       <div className={container}>
-        <PageTitle link={{ href: '/register', info: 'Need an account?' }}>
-          Sign in
+        <PageTitle link={{ href: '/login', info: 'Have an account?' }}>
+          Sign up
         </PageTitle>
         <form onSubmit={onSubmit} className={loginForm}>
-          {loginInputs.map(input => (
+          {registerInputs.map(input => (
             <Controller
               key={input.name}
               control={control}

@@ -14,6 +14,7 @@ export const textField = style({
       border: '1px solid var(--color-primary)',
     },
     '&:disabled': {
+      cursor: 'not-allowed',
       background: '#eceeef',
     },
   },

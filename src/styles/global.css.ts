@@ -38,6 +38,7 @@ globalStyle('html, body', {
 })
 
 globalStyle('main', {
+  minHeight: 'calc(100vh - 56px)',
   paddingTop: 56,
   position: 'relative',
   zIndex: 200,
