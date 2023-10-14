@@ -49,3 +49,23 @@ export const logo = style({
     },
   },
 })
+
+export const form = style({
+  maxWidth: 540,
+  margin: '0 auto',
+})
+
+export const linkBtn = style({
+  color: 'var(--color-primary)',
+  selectors: {
+    '&:hover': {
+      textDecoration: 'underline',
+      color: 'var(--color-secondary)',
+    },
+  },
+})
+
+export const profile = style({
+  borderRadius: '50%',
+  overflow: 'hidden',
+})

@@ -1,5 +1,6 @@
 'use client'
 
+import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -8,11 +9,9 @@ import InfoMsg from '@/components/common/InfoMsg'
 import PageTitle from '@/components/common/PageTitle'
 import TextField from '@/components/common/TextField'
 import { signIn } from '@/services/api/users'
-import { container } from '@/styles/app.css'
-import { ISignInData } from '@/types/users'
-import { isAxiosError } from '@/util'
-
-import { buttonGroup, infoMsg, loginForm, loginInput } from './index.css'
+import useUserStore from '@/store/userStore'
+import { container, form } from '@/styles/app.css'
+import { ErrorResData, ISignInData } from '@/types/users'
 
 type LoginInputName = 'email' | 'password'
 
@@ -42,6 +41,7 @@ const loginInputs: ILoginInput[] = [
 
 export default function LoginForm() {
   const { push } = useRouter()
+  const { setUserData } = useUserStore()
   const {
     handleSubmit,
     control,
@@ -56,14 +56,25 @@ export default function LoginForm() {
   const onSubmit = handleSubmit(async data => {
     try {
       const userData = await signIn(data)
+      setUserData(userData)
       if (userData) push('/')
     } catch (error) {
-      if (isAxiosError(error)) {
-        setFocus('email')
+      if (axios.isAxiosError<ErrorResData, unknown>(error)) {
+        const errorData = error.response?.data
+        if (!errorData) return
+
+        const errorKey = Object.keys(errorData.errors)[0]
+        const errorMsg = errorData?.errors[errorKey]
+
+        const key = Object.keys(defaultValues).includes(errorKey)
+          ? (errorKey as keyof ISignInData)
+          : (errorKey.split(' ')[0] as keyof ISignInData)
+
+        setFocus(key)
         reset()
-        setError('password', {
+        setError(key, {
           type: 'manual',
-          message: 'email or password is invalid',
+          message: `${errorKey} ${errorMsg}`,
         })
       }
     }
@@ -75,7 +86,7 @@ export default function LoginForm() {
         <PageTitle link={{ href: '/register', info: 'Need an account?' }}>
           Sign in
         </PageTitle>
-        <form onSubmit={onSubmit} className={loginForm}>
+        <form onSubmit={onSubmit} className={form}>
           {loginInputs.map(input => (
             <Controller
               key={input.name}
@@ -89,20 +100,22 @@ export default function LoginForm() {
                   {...field}
                   type={input.type}
                   placeholder={input.placeholder}
-                  className={loginInput}
+                  className="mb-[16px]"
                 />
               )}
             />
           ))}
           {Boolean(Object.keys(errors).length) && (
-            <InfoMsg className={infoMsg}>
+            <InfoMsg className="mb-[16px]">
               {errors.email
                 ? errors.email.message
                 : errors.password && errors.password.message}
             </InfoMsg>
           )}
-          <div className={buttonGroup}>
-            <Button type="submit">Sign in</Button>
+          <div className="text-right">
+            <Button type="submit" theme="solid" size="lg">
+              Sign in
+            </Button>
           </div>
         </form>
       </div>

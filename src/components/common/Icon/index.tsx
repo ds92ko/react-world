@@ -12,5 +12,30 @@ export default function Icon({
   type = 'outline',
   className = '',
 }: IProps) {
-  return <div className={className}>{icons[name][type]}</div>
+  return (
+    <div className={className}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill={type === 'outline' ? 'none' : 'currentColor'}
+        viewBox="0 0 24 24"
+        {...(type === 'outline' && {
+          stroke: 'currentColor',
+          strokeWidth: 1.5,
+        })}
+        className="w-full h-full">
+        <path
+          d={icons[name][type]}
+          {...(type === 'outline'
+            ? {
+                strokeLinecap: 'round',
+                strokeLinejoin: 'round',
+              }
+            : {
+                fillRule: 'evenodd',
+                clipRule: 'evenodd',
+              })}
+        />
+      </svg>
+    </div>
+  )
 }

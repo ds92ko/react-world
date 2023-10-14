@@ -1,8 +1,8 @@
-import AuthorInfo from '@/components/common/AuthorInfo'
 import Banner from '@/components/common/Banner'
 import { IArticleData } from '@/types/articles'
 
-import { bannerTitle } from './intex.css'
+import ArticleMeta from '../ArticleMeta'
+import { bannerTitle } from './index.css'
 
 interface IProps {
   data: IArticleData
@@ -10,14 +10,9 @@ interface IProps {
 
 export default function BannerSection({ data }: IProps) {
   return (
-    <Banner>
+    <Banner className="!bg-[var(--color-gray-5)]">
       <h2 className={bannerTitle}>{data.title}</h2>
-      <AuthorInfo
-        imgSrc={data.author.image}
-        username={data.author.username}
-        createdAt={data.createdAt}
-        textColor="white"
-      />
+      <ArticleMeta theme="white" data={data} />
     </Banner>
   )
 }

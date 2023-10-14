@@ -15,20 +15,8 @@ export const meta = style({
 
 export const favorite = style({
   display: 'flex',
-  padding: '4px 8px',
   alignItems: 'center',
-  color: 'var(--color-primary)',
-  fontSize: 14,
   gap: '0 2px',
-  background: 'var(--color-white)',
-  border: '1px solid var(--color-primary)',
-  borderRadius: 3,
-  selectors: {
-    '&:hover, &.active': {
-      background: 'var(--color-primary)',
-      color: 'var(--color-white)',
-    },
-  },
 })
 
 export const articleTitle = style({

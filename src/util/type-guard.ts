@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
 
-export const isAxiosError = (error: unknown): error is AxiosError => {
+export const isAxiosError = <T>(error: unknown): error is AxiosError<T> => {
   return error instanceof AxiosError
 }
 

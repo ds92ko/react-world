@@ -3,6 +3,7 @@
 import { useQuery } from 'react-query'
 
 import BannerSection from '@/components/article/BannerSection'
+import ContentSection from '@/components/article/ContentSection'
 import Loading from '@/components/common/Loading'
 import { fetchArticleDetail } from '@/services/api/articles'
 
@@ -18,7 +19,14 @@ export default function ArticleSlug({ params }: { params: { slug: string } }) {
   )
   console.log(params.slug)
 
+  console.log(data)
+
   if (isLoading) return <Loading />
   if (isError) return <div>isError</div>
-  return <BannerSection data={data} />
+  return (
+    <>
+      <BannerSection data={data} />
+      <ContentSection data={data} />
+    </>
+  )
 }

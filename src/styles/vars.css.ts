@@ -18,6 +18,7 @@ const vars = createGlobalTheme(':root', {
     gray6: '#687077',
     gray7: '#DDD',
     gray8: '#ECEEEF',
+    gray9: '#CCC',
   },
   alpha: {
     black1: 'rgba(0, 0, 0, .1)',

@@ -1,6 +1,7 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 
-import useArticlesStore, { initArticlesParams } from '@/store/articlesStore'
+import useArticlesStore from '@/store/articlesStore'
+import useUserStore from '@/store/userStore'
 
 import {
   tabContentItem,
@@ -11,16 +12,42 @@ import {
 } from './index.css'
 
 export function TabNav() {
-  const { articlesParams, setArticlesParams } = useArticlesStore()
+  const { isLoggedIn } = useUserStore()
+  const { articlesParams, resetArticlesParams, resetFeedParams } =
+    useArticlesStore()
+  const [currentTab, setCurrentTab] = useState(
+    isLoggedIn() ? 'local' : 'global'
+  )
   const { tag } = articlesParams
-
-  const handleClickTab = () => setArticlesParams({ ...initArticlesParams })
 
   return (
     <div className={tabNav}>
       <ul className={tabNavList}>
-        <li className={`${tabNavItem} ${tag ? '' : 'active'}`}>
-          <button type="button" onClick={handleClickTab}>
+        {isLoggedIn() && (
+          <li
+            className={`${tabNavItem} ${
+              tag || currentTab !== 'local' ? '' : 'active'
+            }`}>
+            <button
+              type="button"
+              onClick={() => {
+                resetFeedParams()
+                setCurrentTab('local')
+              }}>
+              Your Feed
+            </button>
+          </li>
+        )}
+        <li
+          className={`${tabNavItem} ${
+            tag || currentTab !== 'global' ? '' : 'active'
+          }`}>
+          <button
+            type="button"
+            onClick={() => {
+              resetArticlesParams()
+              setCurrentTab('global')
+            }}>
             Global Feed
           </button>
         </li>

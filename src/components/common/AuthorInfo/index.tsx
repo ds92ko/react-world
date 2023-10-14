@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { authorLink, createdDate, info, profile } from './index.css'
+import { profile } from '@/styles/app.css'
+
+import { authorLink, createdDate, info } from './index.css'
 
 interface IProps {
   imgSrc: string

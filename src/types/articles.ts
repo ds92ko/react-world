@@ -28,3 +28,8 @@ export interface IArticlesParams {
   offset?: number // 건너뛸 항목수(페이지네이션)
   limit?: number // 한 페이지당 항목수
 }
+
+export interface IFeedParams {
+  offset: number
+  limit: number
+}

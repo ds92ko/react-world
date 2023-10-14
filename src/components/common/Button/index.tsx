@@ -12,19 +12,28 @@ type ButtonType = 'submit' | 'reset' | 'button'
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
   type?: ButtonType
+  theme?: 'solid' | 'outline' | 'outline-white'
+  size?: 'md' | 'lg'
   className?: string
 }
 
 const Button = forwardRef(
   (
-    { children, type = 'button', className, ...props }: IProps,
+    {
+      children,
+      type = 'button',
+      theme = 'outline',
+      size = 'md',
+      className,
+      ...props
+    }: IProps,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     return (
       <button
         ref={ref}
         type={type}
-        className={`${button} ${className}`}
+        className={`${button} ${theme} ${size} ${className}`}
         {...props}>
         {children}
       </button>

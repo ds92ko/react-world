@@ -6,11 +6,6 @@ export const info = style({
   alignItems: 'center',
 })
 
-export const profile = style({
-  borderRadius: '50%',
-  overflow: 'hidden',
-})
-
 export const authorLink = style({
   color: 'var(--color-primary)',
   fontWeight: 500,

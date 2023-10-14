@@ -16,7 +16,7 @@ export default function InfoMsg({
 }: IProps) {
   return (
     <div className={`${infoMsg} ${type} ${className}`}>
-      <Icon name="exclamationCircle" />
+      <Icon name="exclamationCircle" className="w-[24px]" />
       <p>{children}</p>
     </div>
   )

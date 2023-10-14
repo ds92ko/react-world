@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import AuthorInfo from '@/components/common/AuthorInfo'
+import Button from '@/components/common/Button'
 import Icon from '@/components/common/Icon'
 import { TagItem, TagList } from '@/components/common/Tags'
 import { IArticleData } from '@/types/articles'
@@ -28,13 +29,12 @@ export default function Card({ data }: IProps) {
           username={data.author.username}
           createdAt={data.createdAt}
         />
-        {/* TODO: 버튼 컴포넌트 분리 */}
-        <button
-          type="button"
-          className={`${favorite} ${data.favorited ? 'active' : ''}`}>
-          <Icon name="heart" type="solid" className="w-[12px]" />
-          {data.favoritesCount}
-        </button>
+        <Button className={data.favorited ? 'active' : ''}>
+          <div className={favorite}>
+            <Icon name="heart" type="solid" className="w-[12px]" />
+            {data.favoritesCount}
+          </div>
+        </Button>
       </div>
       <Link href={`/article/${data.slug}`}>
         <h2 className={articleTitle}>{data.title}</h2>

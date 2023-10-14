@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { linkBtn } from '@/styles/app.css'
+
 import { pageInfo, pageTitle } from './index.css'
 
 interface IProps {
@@ -17,7 +19,9 @@ function PageTitle({ children, link }: IProps) {
     <>
       <h2 className={pageTitle}>{children}</h2>
       <p className={pageInfo}>
-        <Link href={href}>{info}</Link>
+        <Link href={href} className={linkBtn}>
+          {info}
+        </Link>
       </p>
     </>
   )
